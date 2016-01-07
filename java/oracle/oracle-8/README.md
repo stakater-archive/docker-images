@@ -1,5 +1,7 @@
 ## Base Docker Image
 
+based on Ubuntu 14.04
+
 Run the latest container with:
 
 `docker run stakater/java:oracle-8`

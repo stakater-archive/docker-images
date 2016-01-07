@@ -3,6 +3,10 @@ FROM 				stakater/base:latest
 MAINTAINER 			Rasheed Amir <rasheed@aurorasolutions.io>
 
 
+# Use baseimage-docker's init system.
+CMD 				["/sbin/my_init"]
+
+
 # Install Oracle Java 8
 ENV 				JAVA_VER 8
 ENV 				JAVA_HOME /usr/lib/jvm/java-8-oracle
