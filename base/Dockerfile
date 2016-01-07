@@ -29,13 +29,13 @@ RUN 			cd /home && chown -R stakater:stakater /home/stakater
 
 # Expose the working directory
 VOLUME 			["/home/stakater"]
-
+WORKDIR			/home/stakater
 
 # Enable ssh access to container
 # see: https://github.com/phusion/baseimage-docker#login_ssh
-RUN 			rm -f /etc/service/sshd/down
+# RUN 			rm -f /etc/service/sshd/down
 # permantly add insecure key
-RUN 			/usr/sbin/enable_insecure_key
+# RUN 			/usr/sbin/enable_insecure_key
 
 # use your own key (when using this comment out the insecure key statement)
 # see: https://github.com/phusion/baseimage-docker#using_your_own_key
@@ -44,7 +44,7 @@ RUN 			/usr/sbin/enable_insecure_key
 
 
 # Use baseimage-docker's init system.
-CMD 			["/sbin/my_init"]
+# CMD 			["/sbin/my_init"]
 
 
 #####
