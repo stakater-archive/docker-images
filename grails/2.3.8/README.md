@@ -21,5 +21,3 @@ Push an image:
 `sudo docker push stakater/grails:2.3.8`
 
 _Note_ you might have to login first before you can push the image to docker-hub `sudo docker login`
-
-
