@@ -43,3 +43,7 @@ EXPOSE 					9000
 
 # expose the gulp port
 EXPOSE 					35729
+
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

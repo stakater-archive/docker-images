@@ -3,6 +3,10 @@ FROM 				stakater/base:latest
 MAINTAINER 			Rasheed Amir <rasheed@aurorasolutions.io>
 
 
+# Use baseimage-docker's init system.
+CMD 				["/sbin/my_init"]
+
+
 # Install Oracle Java 6
 ENV 				JAVA_VER 6
 ENV 				JAVA_HOME /usr/lib/jvm/java-6-oracle
@@ -17,3 +21,7 @@ RUN 				echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' 
     				apt-get clean && \
     				rm -rf /var/lib/apt/lists && \
     				rm -rf /var/cache/oracle-jdk${JAVA_VER}-installer
+
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
