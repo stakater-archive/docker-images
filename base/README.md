@@ -13,3 +13,5 @@ Push an image:
 `sudo docker push stakater/base`
 
 _Note_ you might have to login first before you can push the image to docker-hub `sudo docker login`
+
+Its important to read this documentation: https://github.com/phusion/baseimage-docker
