@@ -29,7 +29,6 @@ RUN 			cd /home && chown -R stakater:stakater /home/stakater
 
 # Expose the working directory
 VOLUME 			["/home/stakater"]
-WORKDIR			/home/stakater
 
 
 # Use baseimage-docker's init system.
