@@ -17,7 +17,7 @@ RUN 			DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-prop
 
 
 # Install utilities
-RUN 			apt-get -y install vim nano git sudo zip bzip2 fontconfig curl
+RUN 			apt-get -y install vim nano git sudo zip bzip2 fontconfig curl wget
 
 
 # Configure users
