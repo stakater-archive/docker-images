@@ -26,3 +26,9 @@ $ lspci | grep -i eth
 
 $ ifconfig
 $ ifconfig eth0
+
+5. run container and bash into it
+
+`docker run --name stakater_grails --rm -i -t stakater/grails:2.3.8 bash`
+
+This will create a container named stakater_grails and start a Bash session.
