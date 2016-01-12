@@ -28,8 +28,5 @@ RUN 					chmod +x /etc/service/tomcat/run
 
 EXPOSE 					8080
 
-ENV PATH $CATALINA_HOME/bin:$PATH
-RUN mkdir -p "$CATALINA_HOME"
-WORKDIR $CATALINA_HOME
 # Use baseimage-docker's init system.
 CMD 					["/sbin/my_init"]
