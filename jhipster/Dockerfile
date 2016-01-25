@@ -47,8 +47,8 @@ RUN apt-get -y install gradle
 # install node.js from PPA
 #RUN add-apt-repository ppa:chris-lea/node.js
 
-# Note the new setup script name for Node.js v0.12
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+# Note the new setup script name for Node.js
+RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
 
 RUN apt-get update
 
@@ -85,7 +85,7 @@ RUN apt-get install -y -f ruby-compass
 RUN gem install compass
 
 #---------- Install JHipster
-RUN npm install -g generator-jhipster@2.24.0
+RUN npm install -g generator-jhipster@2.27.0
 
 #---------- Install JHipster-UML
 RUN npm install -g jhipster-uml@1.5.2
