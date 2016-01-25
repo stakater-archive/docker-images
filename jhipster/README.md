@@ -11,6 +11,8 @@ Step 2 - Get into docker container:
 `ssh -p 4022 jhipster@localhost`
 pwd: `jhipster`
 
+if you find the error, "host key verification failed" then run the following command and ssh again.<br/>
+ssh-keygen -f "/home/ubuntu/.ssh/known_hosts" -R [localhost]:4022<br/><br/>
 Step 3 - Build the app
 
 this will ignore the tests and build a package:
