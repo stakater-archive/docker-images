@@ -25,6 +25,8 @@ docker run -d -v "/Users/rasheed/Documents/projects/pliro/ams/logs:/var/log/app"
 
 ./filebeat -e -d "*" -c filebeat.yml
 
+run filebeat with full debug logs...
+
 ./filebeat -e -d "*" -c /etc/filebeat/filebeat.yml
 
 Run filebeat manually with debug level logs:
@@ -35,3 +37,17 @@ CMD 					["/usr/bin/filebeat", "-e", "-d", "\"*\"", "-c", "/etc/filebeat/filebea
 filebeat logs can be found at: /var/log/mybeat/mybeat
 
 and level can be changed in filebeat.yml
+
+
+filebeat & elasticsearch
+
+Before starting Filebeat for the first time, run this command (replace ELASTIC_SEARCH_HOST with the appropriate hostname) to load the default index template in Elasticsearch:
+
+    curl -XPUT 'http://{ELASTIC_SEARCH_HOST}:9200/_template/filebeat?pretty' -d@/{PATH_TO_THIS_FILE}/filebeat.template.json
+
+And the response should be:
+
+{
+  "acknowledged" : true
+}
+
