@@ -36,8 +36,15 @@ $ docker run -d -v "$PWD/esdata":/usr/share/elasticsearch/data stakater/elastics
 
 This image includes EXPOSE 9200 9300 (default http.port), so standard container linking will make it automatically available to the linked containers.
 
+Tell elasticsearch container following things:
+1. 
+2. This image is configured with a volume at /usr/share/elasticsearch/data to hold the persisted index data. Use that path if you would like to keep the data in a mounted volume
+e.g. 
+`-v "$PWD/esdata":/usr/share/elasticsearch/data`
+3. ports to expose
 
-docker run -d -p 9200:9200 -p 9300:9300 stakater/elasticsearch elasticsearch
+`docker run -d -p 9200:9200 -p 9300:9300 stakater/elasticsearch elasticsearch`
+
 
 Basic elastic search queries
 

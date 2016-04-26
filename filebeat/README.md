@@ -18,7 +18,14 @@ _Note_ you might have to login first before you can push the image to docker-hub
 
 Before starting Filebeat, you should look at the configuration options in the configuration file, for example /etc/filebeat/filebeat.yml
 
-docker run -d -v "/Users/rasheed/Documents/projects/pliro/ams/logs:/var/log/app" -e "LOGSTASH_HOST=192.168.99.100" -e "LOGSTASH_PORT=5044" stakater/filebeat
+Tell filebeat container three things:
+1. location (directory) containing logs to beat
+2. logstash server host
+3. logstash server port
+
+e.g.
+
+`docker run -d -v "/Users/rasheed/Documents/projects/pliro/ams/logs:/var/log/app" -e "LOGSTASH_HOST=192.168.99.100" -e "LOGSTASH_PORT=5044" stakater/filebeat`
 
 
 /etc/init.d/filebeat start
@@ -51,3 +58,6 @@ And the response should be:
   "acknowledged" : true
 }
 
+Things to do:
+
+1. push the filebeat container to dockehub
