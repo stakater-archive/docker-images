@@ -108,6 +108,11 @@ filebeat:
         # Default is 5s.
         #timeout: 5s
 
+      multiline:
+        pattern: ^(19|20)[0-9][0-9]([- /.])(0[1-9]|1[012])([- /.])(0[1-9]|[12][0-9]|3[01])
+        negate: true
+        match: after
+
       # Setting tail_files to true means filebeat starts readding new files at the end
       # instead of the beginning. If this is used in combination with log rotation
       # this can mean that the first entries of a new file are skipped.
