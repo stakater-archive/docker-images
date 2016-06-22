@@ -1,4 +1,5 @@
 FROM gocd/gocd-agent:16.5.0-3305
+MAINTAINER hazim1093 <hazim_malik@hotmail.com>
 
 # Install build essential for `make`
 RUN apt-get update && apt-get install -y wget unzip build-essential
