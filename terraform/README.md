@@ -1,7 +1,8 @@
 # Phusion Docker Image with `terraform` & `make` installed 
 
 This is a phusion based docker image which has `terraform 0.6.12`, `make` `awscli` and `s3cmd` installed.
-It's purpose is to run any project that is based on terraform.
+
+It's purpose is to run any terraform based project that is placed in the container. You can enter any command required to build your project other than the `terraform` commands as well (e.g. make etc.) 
 
 ## Usage
 ### Creating a Container:
