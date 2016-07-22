@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.18
 MAINTAINER hazim1093 <hazim_malik@hotmail.com>
 
 # Install build essential for `make`
-RUN apt-get update && apt-get install -y wget jq git unzip build-essential
+RUN apt-get update && apt-get install -y wget jq git perl unzip build-essential
 
 # Install packer
 ENV PACKER_VERSION 0.10.1
