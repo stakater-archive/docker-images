@@ -3,21 +3,20 @@
 ############################################################
 
 # From & maintainer
-FROM 			phusion/baseimage:0.9.17
+FROM 			phusion/baseimage:0.9.19
 MAINTAINER 		Rasheed Amir <rasheed@aurorasolutions.io>
 
-
 # Make sure the package repository is up to date
-RUN 			echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+RUN 			echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" > /etc/apt/sources.list
 RUN 			apt-get -y update
 
 
 # Install python-software-properties (so you can do add-apt-repository)
-RUN 			DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-properties software-properties-common
+RUN 			DEBIAN_FRONTEND=noninteractive apt-get install -y python-software-properties
 
 
 # Install utilities
-RUN 			apt-get -y install vim nano git sudo zip bzip2 fontconfig curl wget
+RUN 			apt-get -y install nano git sudo zip bzip2 fontconfig wget
 
 
 # Configure users
