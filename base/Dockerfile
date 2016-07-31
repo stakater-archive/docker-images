@@ -16,7 +16,7 @@ RUN 			DEBIAN_FRONTEND=noninteractive apt-get install -y python-software-propert
 
 
 # Install utilities
-RUN 			apt-get -y install nano git sudo zip bzip2 fontconfig wget
+RUN 			apt-get -y install sudo nano git sudo zip bzip2 fontconfig wget
 
 
 # Configure users
