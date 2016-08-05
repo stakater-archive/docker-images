@@ -26,6 +26,8 @@ echo "=> Creating backup script"
 rm -f /backup.sh
 cat <<EOF >> /backup.sh
 #!/bin/bash
+export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
+
 MAX_BACKUPS=${MAX_BACKUPS}
 
 BACKUP_NAME=\$(date +\%Y.\%m.\%d.\%H\%M\%S).sql
@@ -52,14 +54,14 @@ if ${BACKUP_CMD} ;then
     echo "=> Upload to s3 started: \${BACKUP_NAME}"
 
     # Create bucket, if it doesn't already exist
-    BUCKET_EXIST=$(aws s3 --region ${AWS_DEFAULT_REGION} ls | grep ${S3_BUCKET_NAME} | wc -l)
-    if [ "${BUCKET_EXIST}" -eq 0 ];
+    BUCKET_EXIST=\$(aws s3 --region ${AWS_DEFAULT_REGION} ls | grep ${S3_BUCKET_NAME} | wc -l)
+    if [ \${BUCKET_EXIST} -eq 0 ];
     then
       aws s3 --region ${AWS_DEFAULT_REGION} mb s3://${S3_BUCKET_NAME}
     fi
 
     # Upload the backup to S3 with timestamp
-    aws s3 --region ${AWS_DEFAULT_REGION} cp ${BACKUP_NAME} s3://${S3_BUCKET_NAME}/${BACKUP_NAME}
+    aws s3 --region ${AWS_DEFAULT_REGION} cp \${BACKUP_NAME} s3://${S3_BUCKET_NAME}/\${BACKUP_NAME}
 
     echo "=> Upload to s3 done"
 
