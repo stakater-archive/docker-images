@@ -1,5 +1,6 @@
 #!/bin/bash
-
+export PATH=$PATH:/usr/bin:/usr/local/bin:/bin
+	
 if [ "${MYSQL_ENV_MYSQL_PASS}" == "**Random**" ]; then
         unset MYSQL_ENV_MYSQL_PASS
 fi
@@ -61,7 +62,7 @@ if ${BACKUP_CMD} ;then
     fi
 
     # Upload the backup to S3 with timestamp
-    aws s3 --region \${AWS_DEFAULT_REGION} cp \${BACKUP_NAME} s3://\${S3_BUCKET_NAME}/\${BACKUP_NAME}
+    aws s3 --region \${AWS_DEFAULT_REGION} cp /backup/\${BACKUP_NAME} s3://\${S3_BUCKET_NAME}/\${BACKUP_NAME}
 
     echo "=> Upload to s3 done"
 
@@ -102,7 +103,7 @@ elif [ -n "${INIT_RESTORE_LATEST}" ]; then
     ls -d -1 /backup/* | tail -1 | xargs /restore.sh
 fi
 
-echo "${CRON_TIME} /backup.sh >> /mysql_backup.log 2>&1" > /crontab.conf
+echo "${CRON_TIME} export S3_BUCKET_NAME=${S3_BUCKET_NAME}; export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}; export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}; export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}; /backup.sh >> /mysql_backup.log 2>&1" > /crontab.conf
 crontab  /crontab.conf
 echo "=> Running cron job"
 exec cron -f
