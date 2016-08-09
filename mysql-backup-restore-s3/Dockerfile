@@ -18,7 +18,8 @@ ENV CRON_TIME="0 0 * * *" \
 	AWS_DEFAULT_REGION="us-east-1" \
 	PATHS_TO_BACKUP="/paths/to/backup" \
 	BACKUP_NAME="backup" \
-	RESTORE="false"
+	LAST_BACKUP="" \
+	RESTORE="true"
 
 ADD run.sh /run.sh
 

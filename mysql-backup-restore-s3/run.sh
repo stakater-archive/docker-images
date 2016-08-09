@@ -77,13 +77,28 @@ echo "=> Creating restore script"
 rm -f /restore.sh
 cat <<EOF >> /restore.sh
 #!/bin/bash
-echo "=> Restore database from \$1"
-if mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} < \$1 ;then
+    BUCKET_EXIST=\$(aws s3 --region \${AWS_DEFAULT_REGION} ls | grep \${S3_BUCKET_NAME} | wc -l)
+    if [ \${BUCKET_EXIST} -eq 0 ];
+    then
+      echo "Bucket Doesnt Exist"
+      exit 1
+    fi
+
+    if [ -z "\${LAST_BACKUP}" ]; then
+    # Find last backup file
+    : ${LAST_BACKUP:=$(aws s3 ls s3://$S3_BUCKET_NAME | awk -F " " '{print $4}' | sort -r | head -n1)}
+    fi
+    
+    # Download backup from S3
+    echo "=> Restore from S3 => $LAST_BACKUP"
+    aws s3 cp s3://$S3_BUCKET_NAME/$LAST_BACKUP $LAST_BACKUP
+    echo "=> Restore database from \$1"
+    if mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} < \/$LAST_BACKUP ;then
     echo "   Restore succeeded"
-else
+    else
     echo "   Restore failed"
-fi
-echo "=> Done"
+    fi
+    echo "=> Done"
 EOF
 chmod +x /restore.sh
 
@@ -93,14 +108,10 @@ tail -F /mysql_backup.log &
 if [ -n "${INIT_BACKUP}" ]; then
     echo "=> Create a backup on the startup"
     /backup.sh
-elif [ -n "${INIT_RESTORE_LATEST}" ]; then
-    echo "=> Restore latest backup"
-    until nc -z $MYSQL_HOST $MYSQL_PORT
-    do
-        echo "waiting database container..."
-        sleep 1
-    done
-    ls -d -1 /backup/* | tail -1 | xargs /restore.sh
+fi
+
+if [[ "$RESTORE" == "true" ]]; then
+  ./restore.sh
 fi
 
 echo "${CRON_TIME} export S3_BUCKET_NAME=${S3_BUCKET_NAME}; export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}; export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}; export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}; /backup.sh >> /mysql_backup.log 2>&1" > /crontab.conf
