@@ -10,7 +10,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" > /etc/apt/
 	pip install awscli && \
     mkdir /backup
 
-ENV CRON_TIME="*/2 * * * *" \
+ENV CRON_TIME="00 00 * * *" \
     MYSQL_DB="--all-databases" \ 
 	S3_BUCKET_NAME="docker-backups.example.com" \
 	AWS_ACCESS_KEY_ID="**DefineMe**" \ 
