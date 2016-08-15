@@ -1,34 +1,27 @@
 Based on Ubuntu 16.04 LTS Xenial
 
-The images offers following features:
+The image offers following features:
 
 1. backup of mysql database
 2. upload of mysql backup to s3
 3. download mysql backup from s3
 4. restore s3 backup
 
+Build an image:
+If you are using local Docker, following command will build a local image, skip this setup if you want to get the latest image from the docker hub.
+
+`docker build -t stakater/mysql-backup-restore-s3 .`
+
+
 Run the latest container with:
 
 `docker run stakater/mysql-backup-restore-s3`
 
-Build an image:
-`docker build -t stakater/mysql-backup-restore-s3 .`
+Run and link the container with the mysql container from where it will clone the backup and upload to S3:
 
-Push an image:
+`docker run -d --link mysqlbackuprestores3_mysql_1:mysql -v $PWD:/backup -e CRON_TIME="*/2 * * * *" -e MYSQL_USER=root -e MYSQL_PASS=dbpass stakater/mysql-backup-restore-s3`
+
+
+Push an image if you changed anything locally:
+
 `sudo docker push stakater/mysql-backup-restore-s3`
-
-"*/2 * * * *"
-
-    docker run -d \
-        --env MYSQL_HOST=mysql.host \
-        --env MYSQL_PORT=27017 \
-        --env MYSQL_USER=admin \
-        --env MYSQL_PASS=password \
-        --volume host.folder:/backup
-        tutum/mysql-backup
-
-
-docker run -d --env MYSQL_HOST=localhost --env MYSQL_PORT=3306 --env MYSQL_USER=root --env MYSQL_PASS= --volume $PWD:/backup --env 
-CRON_TIME="*/2 * * * *" --env MYSQL_DB=pliro stakater/mysql-backup-restore-s3
-
-docker run -d --link mysqlbackuprestores3_mysql_1:mysql -v $PWD:/backup -e CRON_TIME="*/2 * * * *" -e MYSQL_USER=root -e MYSQL_PASS=dbpass stakater/mysql-backup-restore-s3
