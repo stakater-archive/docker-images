@@ -16,6 +16,7 @@ If you are using local Docker, following command will build a local image, skip 
 Run the latest container with:
 
 `docker run stakater/mysql-backup-restore-s3`
+If the image isn't found locally it will automatically pull from the docker hub.
 
 Run and link the container with the mysql container from where it will clone the backup and upload to S3:
 
