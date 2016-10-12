@@ -1,6 +1,18 @@
 version: '2'
 
 services:
+  cassandra:
+    image: cassandra
+    restart: always
+    volumes:
+      - cassandradata:/var/lib/cassandra
+    ports:
+      - 7199:7199
+    expose:
+      - 9160
+    environment:
+      - CASSANDRA_START_RPC=true
+      
   grafana:
     image: grafana/grafana:2.6.0
     restart: always
@@ -11,3 +23,5 @@ services:
 
 volumes:
  grafanadata:
+ cassandradata:
+ 
