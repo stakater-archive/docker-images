@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  grafana:
+    image: grafana/grafana:2.6.0
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - grafanadata:/var/lib/grafana
+
+volumes:
+ grafanadata:
