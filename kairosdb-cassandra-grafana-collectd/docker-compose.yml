@@ -12,7 +12,22 @@ services:
       - 9160
     environment:
       - CASSANDRA_START_RPC=true
-      
+
+  kairosdb:
+    image: mesosphere/archlinux-kairosdb:master
+    restart: always
+    links:
+      - cassandra
+    volumes:
+      - kairoslog:/opt/kairosdb/log
+      - kairosdata:/data
+    ports:
+      - 8080:8080
+    expose:
+      - 4242
+    environment:
+      - CASS_HOSTS=cassandra:9160
+
   grafana:
     image: grafana/grafana:2.6.0
     restart: always
@@ -24,4 +39,6 @@ services:
 volumes:
  grafanadata:
  cassandradata:
+ kairosdata:
+ kairoslog:
  
