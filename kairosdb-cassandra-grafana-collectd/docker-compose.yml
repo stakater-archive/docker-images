@@ -14,7 +14,7 @@ services:
       - CASSANDRA_START_RPC=true
 
   kairosdb:
-    image: mesosphere/archlinux-kairosdb:master
+    image: stakater/kairosdb
     restart: always
     links:
       - cassandra
@@ -27,6 +27,9 @@ services:
       - 4242
     environment:
       - CASS_HOSTS=cassandra:9160
+      - REPFACTOR=1
+      - PORT_TELNET=4242
+      - PORT_HTTP=8080
 
   grafana:
     image: grafana/grafana:2.6.0
