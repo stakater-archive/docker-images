@@ -21,15 +21,19 @@ FROM 				stakater/java:oracle-8
 
 MAINTAINER 			Rasheed Amir <rasheed@aurorasolutions.io>
 
+# install gettext for envsubst
+RUN 				apt-get update
+RUN 				apt-get install -y gettext-base
+
 # Install KAIROSDB
 RUN 				wget -O /var/cache/kairosdb_1.1.2-1_all.deb \ 
 					https://github.com/kairosdb/kairosdb/releases/download/v1.1.2/kairosdb_1.1.2-1_all.deb
 
 RUN 				dpkg -i /var/cache/kairosdb_1.1.2-1_all.deb
 
-ADD 				kairosdb.properties /opt/kairosdb/conf/kairosdb.properties
+ADD 				kairosdb.properties /tmp/kairosdb.properties
 
-ADD 				run.sh /usr/local/sbin/run_kairosdb.sh
+ADD 				runKairos.sh /usr/local/sbin/run_kairosdb.sh
 
 ADD 				logback.xml /opt/kairosdb/conf/logging/logback.xml
 
