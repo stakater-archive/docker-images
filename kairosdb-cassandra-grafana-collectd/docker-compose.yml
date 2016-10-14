@@ -32,7 +32,7 @@ services:
       - PORT_HTTP=8080
 
   grafana:
-    image: grafana/grafana:2.6.0
+    image: stakater/grafana:latest
     restart: always
     ports:
       - 3000:3000
