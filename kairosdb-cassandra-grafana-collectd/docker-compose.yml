@@ -36,8 +36,12 @@ services:
     restart: always
     ports:
       - 3000:3000
+    links:
+      - kairosdb      
     volumes:
       - grafanadata:/var/lib/grafana
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-kairosdb-datasource
 
 volumes:
  grafanadata:
