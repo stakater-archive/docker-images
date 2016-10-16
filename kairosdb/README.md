@@ -8,6 +8,10 @@ Dockerfile to run KairosDB on Cassandra. Configuration is done through environme
 
 ## Advanced
 
+### Simple!
+
+		./build.sh
+
 Build an image:
 `docker build -t stakater/kairosdb .`
 
