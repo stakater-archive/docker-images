@@ -19,7 +19,7 @@ RUN                 apt-get update && \
 VOLUME              ["/var/lib/grafana", "/var/lib/grafana/plugins", "/var/log/grafana", "/etc/grafana"]
 
 # install kairosdb datasource
-RUN                 grafana-cli --pluginsDir /etc/grafana/plugins plugins install grafana-kairosdb-datasource
+RUN                 grafana-cli plugins install grafana-kairosdb-datasource
 
 EXPOSE              3000
 

@@ -6,6 +6,12 @@ This builds a Docker image with the latest master build of Grafana.
 
 ./build.sh
 
+## Add KairosDB datasource
+      http://docs.grafana.org/datasources/kairosdb/
+
+* Choose "proxy"
+* Then 'metrics names', 'tags', 'values' etc. should pre-populate 
+
 ## Running your Grafana container
 
 Start your container binding the external port `3000`.
