@@ -52,3 +52,7 @@ Response
 			
 		Failure
 			Returns 500 if any of the checks are unhealthy.
+
+### [Web UI](https://kairosdb.github.io/docs/build/html/WebUI.html)
+
+        http://[host]:[port]
