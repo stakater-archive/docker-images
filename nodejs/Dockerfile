@@ -12,7 +12,7 @@ RUN 					apt-get -y update
 
 
 # install NodeJs
-RUN 					curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
+RUN 					curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
 RUN 					apt-get update
 RUN 					apt-get -y install nodejs
 
