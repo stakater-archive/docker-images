@@ -3,7 +3,7 @@ Grafana KairosDB Cassandra
 
 This docker compose runs KairosDB, Cassandra & Grafana which is a perfect combo for stats monitoring!
 
-
+    docker-compose -f cassandra-kairosdb-grafana.yml up
 
 ## KairosDB
 
