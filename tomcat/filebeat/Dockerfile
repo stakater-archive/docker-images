@@ -10,6 +10,7 @@ RUN curl -L -O https://download.elastic.co/beats/filebeat/filebeat_1.2.1_amd64.d
 RUN dpkg -i filebeat_1.2.1_amd64.deb
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN sudo chmod +x /docker-entrypoint.sh
 COPY filebeat.yml /etc/filebeat/filebeat.yml
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
