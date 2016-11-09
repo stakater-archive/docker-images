@@ -2,9 +2,13 @@ FROM stakater/tomcat:8
 MAINTAINER hazim1093 <hazim_malik@hotmail.com>
 
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends wget pwgen ca-certificates && \
+    apt-get install -yq --no-install-recommends wget pwgen ca-certificates supervisor && \
   	apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/log/supervisor
+# supervisor base configuration
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN curl -L -O https://download.elastic.co/beats/filebeat/filebeat_1.2.1_amd64.deb
 RUN dpkg -i filebeat_1.2.1_amd64.deb
@@ -18,4 +22,5 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EXPOSE 8080
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/bin/filebeat", "-c", "/etc/filebeat/filebeat.yml"]
+# default command
+CMD ["/usr/bin/supervisord"]
