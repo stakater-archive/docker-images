@@ -13,10 +13,10 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN sudo chmod +x /docker-entrypoint.sh
 COPY filebeat.yml /etc/filebeat/filebeat.yml
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 8080
 
 CMD ["/usr/bin/filebeat", "-c", "/etc/filebeat/filebeat.yml"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
