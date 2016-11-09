@@ -17,6 +17,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 8080
 
-CMD ["/usr/bin/filebeat", "-c", "/etc/filebeat/filebeat.yml"]
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh /usr/bin/filebeat -c /etc/filebeat/filebeat.yml"]
