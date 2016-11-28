@@ -2,7 +2,8 @@ FROM 				stakater/nginx:latest
 
 MAINTAINER          Rasheed Amir <rasheed@aurorasolutions.io>
 
-ARG                 CONSUL_TEMPLATE_VERSION
+# setting a default value to make it work on dockerhub
+ARG                 CONSUL_TEMPLATE_VERSION=0.16.0
 
 # remove all default configurations from Nginx
 # RUN 				rm -v /etc/nginx/conf.d/*.conf
