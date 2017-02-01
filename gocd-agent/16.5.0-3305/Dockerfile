@@ -7,10 +7,10 @@ RUN pip install --upgrade awscli
 
 RUN apt-get clean
 
-# Install terraform 
+# Install terraform
 RUN mkdir -p /opt/terraform
-RUN wget -nc -q https://releases.hashicorp.com/terraform/0.7.3/terraform_0.7.3_linux_amd64.zip -P /opt/terraform
-RUN unzip -q /opt/terraform/terraform_0.7.3_linux_amd64.zip -d /opt/terraform
+RUN wget -nc -q https://releases.hashicorp.com/terraform/0.7.13/terraform_0.7.13_linux_amd64.zip -P /opt/terraform
+RUN unzip -q /opt/terraform/terraform_0.7.13_linux_amd64.zip -d /opt/terraform
 ENV PATH /opt/terraform:$PATH
 
 # base image's cmd
