@@ -1,9 +1,11 @@
-FROM gocd/gocd-agent:16.11.0
+FROM gocd/gocd-agent-deprecated:16.11.0
 MAINTAINER Hazim <hazim@aurorasolutions.io>
 
 RUN apt-get -y update
 RUN apt-get -y install jq python3-pip uuid wget unzip
-RUN pip3 install --upgrade awscli setuptools ruamel.yaml
+RUN pip3 install --upgrade awscli 
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --upgrade ruamel.yaml
 
 RUN apt-get clean
 
