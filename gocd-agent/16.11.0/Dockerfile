@@ -2,10 +2,20 @@ FROM gocd/gocd-agent-deprecated:16.11.0
 MAINTAINER Hazim <hazim@aurorasolutions.io>
 
 RUN apt-get -y update
-RUN apt-get -y install jq python3-pip uuid wget unzip
-RUN pip3 install --upgrade awscli 
-RUN pip3 install --upgrade setuptools
-RUN pip3 install --upgrade ruamel.yaml
+RUN apt-get -y install wget python-pip
+#Install Python -- Using latest because the rest install 3.4.2
+RUN mkdir -p /etc/downloads/python
+RUN mkdir -p /opt/bin
+RUN rm /usr/bin/python3
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -P /etc/downloads/python
+RUN chmod +x /etc/downloads/python/Miniconda3-latest-Linux-x86_64.sh
+RUN /etc/downloads/python/Miniconda3-latest-Linux-x86_64.sh -bf -p /opt/python
+RUN ln -s /opt/python/bin/python /usr/bin/python3
+ENV PATH $PATH:/opt/bin:
+RUN apt-get -y install jq python3-pip python-dev uuid wget unzip
+RUN pip install --upgrade awscli
+RUN pip install --upgrade setuptools
+RUN pip install --upgrade ruamel.yaml
 
 RUN apt-get clean
 
