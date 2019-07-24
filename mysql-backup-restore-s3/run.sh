@@ -93,7 +93,7 @@ cat <<EOF >> /restore.sh
     echo "=> Restore from S3 => $LAST_BACKUP"
     aws s3 cp s3://$S3_BUCKET_NAME/$LAST_BACKUP $LAST_BACKUP
     echo "=> Restore database from \$1"
-    if mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} < \/$LAST_BACKUP ;then
+    if mysql -h${MYSQL_HOST} -P${MYSQL_PORT} -u${MYSQL_USER} -p${MYSQL_PASS} --database=${MYSQL_DB} < \/$LAST_BACKUP ;then
     echo "   Restore succeeded"
     else
     echo "   Restore failed"
